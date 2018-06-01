@@ -39,6 +39,10 @@ var Player = function(x, y){
 Player.prototype.update = function(dt){
 
 }
+
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.player), this.x, this.y);
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
