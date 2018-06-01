@@ -33,9 +33,12 @@ Enemy.prototype.render = function() {
 var Player = function(x, y){
     this.x = x;
     this.y = y;
+    this.player = 'images/char-princess-girl.png'
 }
 
+Player.prototype.update = function(dt){
 
+}
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
