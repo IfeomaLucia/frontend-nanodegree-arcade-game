@@ -18,8 +18,8 @@ Enemy.prototype.update = function(dt) {
         this.x = -100;
         this.speed = 50;
     }
-    
-    
+
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -44,8 +44,19 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.player), this.x, this.y);
 };
 
-Player.prototype.handleInput = function(){
-
+Player.prototype.handleInput = function(keyPress){
+  if(keyPress == 'right' && this.x > 0){
+    this.x += 102;
+  }
+  if(keyPress == 'left' && this.x > 0){
+    this.x -= 102;
+  }
+  if(keyPress == 'up' && this.x > 0){
+    this.x += 102;
+  }
+  if(keyPress == 'down' && this.x > 0){
+    this.x -= 102;
+  }
 }
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -58,7 +69,7 @@ enemyLocation.forEach(function(locationY){
     allEnemies.push(enemy);
 });
 
-var player = new Player(0, 606);
+var player = new Player(50, 50);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
