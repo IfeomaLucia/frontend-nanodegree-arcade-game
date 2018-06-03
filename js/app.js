@@ -16,10 +16,14 @@ Enemy.prototype.update = function(dt) {
 
     if(this.x > 505){
         this.x = -100;
-        this.speed = 50;
+        this.speed = 200 + (Math.random() * 1000);
     }
 
-
+    if(player.x < this.x + 50 && player.x + 50 > this.x &&
+       player.y < this.y + 40 && player.y + 40 > this.y){
+      player.x = 200;
+      player.y = 400;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -45,17 +49,24 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function(keyPress){
-  if(keyPress == 'right' && this.x > 0){
-    this.x += 102;
+  if(keyPress == 'right' && this.x < 400){
+    this.x += 100;
   }
   if(keyPress == 'left' && this.x > 0){
-    this.x -= 102;
+    this.x -= 100;
   }
-  if(keyPress == 'up' && this.x > 0){
-    this.x += 102;
+  if(keyPress == 'up' && this.y > 0){
+    this.y -= 90;
   }
-  if(keyPress == 'down' && this.x > 0){
-    this.x -= 102;
+  if(keyPress == 'down' && this.y < 400){
+    this.y += 90;
+  }
+
+  if(this.y < 0){
+    setTimeout(function() {
+      player.x = 200;
+      player.y = 400;
+    }, 200);
   }
 }
 // Now instantiate your objects.
@@ -65,11 +76,11 @@ var allEnemies = [];
 var enemyLocation = [60, 140, 220];
 
 enemyLocation.forEach(function(locationY){
-    enemy = new Enemy(0, locationY, 50);
+    enemy = new Enemy(0, locationY, 300);
     allEnemies.push(enemy);
 });
 
-var player = new Player(50, 50);
+var player = new Player(200, 400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
